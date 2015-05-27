@@ -29,17 +29,11 @@
 
 ## 使用
 
-在页面中加入选择框，示例代码使用 slim 格式
+在页面中加入选择框
 
-```ruby
-  .city-group
-    select.city-select
-      option --省份--
-      = options_for_select(ChinaCity.list)
-    select.city-select
-      option --城市--
-    select.city-select
-      option --地区--
+```html
+
+
 ```
 
 请留意：所有选择框都要有 `city-select` class，并都包含于 class='city-group' 的 DOM 元素之下。
@@ -57,7 +51,26 @@ rails server # http://localhost:3000/china_city
 ```
 
 ## 测试
-
+<%= form_for :address, url: addresses_path do |f| %>
+    <div class='city-group'>
+        <select name="address[province]" id="address_province" class='city-select'>
+          <option value=''>--省份--</option>
+          <%= options_for_select(ChinaCity.list, @address.province) %>
+        </select>
+        <select name="address[city]" id="address_city" class='city-select'>
+          <option value=''>--城市--</option>
+          <%= options_for_select(ChinaCity.list(@address.province), @address.city) %>
+        </select>
+        <select name="address[county]" id="address_county" class='city-select'>
+          <option value=''>--地区--</option>
+          <%= options_for_select(ChinaCity.list(@address.city), @address.county) %>
+        </select>
+        <div class="input-row">
+          <label>邮编:</label>
+          <%= f.number_field :zipcode, class: 'zipcode' %>
+        </div>
+    </div>
+<% end %>
 ```bash
 rvm use 2.0.0
 rake appraisal:rails4 spec
