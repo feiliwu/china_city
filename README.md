@@ -32,25 +32,6 @@
 在页面中加入选择框
 
 ```html
-
-
-```
-
-请留意：所有选择框都要有 `city-select` class，并都包含于 class='city-group' 的 DOM 元素之下。
-
-选择后的值为国家地区编码，如深圳市的为 `440300`，可通过调用 `ChinaCity.get('440300')` 将编码转化为城市名称。
-
-## 贡献
-
-```bash
-git clone git@github.com:saberma/china_city.git
-cd china_city
-rake appraisal:install
-cd spec/dummy
-rails server # http://localhost:3000/china_city
-```
-
-## 测试
 <%= form_for :address, url: addresses_path do |f| %>
     <div class='city-group'>
         <select name="address[province]" id="address_province" class='city-select'>
@@ -71,6 +52,23 @@ rails server # http://localhost:3000/china_city
         </div>
     </div>
 <% end %>
+```
+
+请留意：所有选择框都要有 `city-select` class，并都包含于 class='city-group' 的 DOM 元素之下。
+
+选择后的值为国家地区编码，如深圳市的为 `440300`，可通过调用 `ChinaCity.get('440300')` 将编码转化为城市名称。
+
+## 贡献
+
+```bash
+git clone git@github.com:saberma/china_city.git
+cd china_city
+rake appraisal:install
+cd spec/dummy
+rails server # http://localhost:3000/china_city
+```
+
+## 测试
 ```bash
 rvm use 2.0.0
 rake appraisal:rails4 spec
